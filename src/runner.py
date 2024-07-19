@@ -1,14 +1,12 @@
 from typing import Tuple
-import logging
 
 from apps.robot.service import Robot
+from exceptions.exceptions import IncorrectCommand
+from exceptions.exceptions import InvalidInitialPosition
 from models.models import CardinalPoint
 from models.models import Command
 from models.models import Direction
-from exceptions.exceptions import IncorrectCommand
-from exceptions.exceptions import InvalidInitialPosition
-
-logger = logging.getLogger(__name__)
+from utils.logger import logger
 
 
 def valid_first_command(command: str) -> Tuple[int, int, CardinalPoint] | None:

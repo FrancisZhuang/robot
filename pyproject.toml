@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [tool.poetry]
 name = "robot"
 version = "0.1.0"
@@ -13,7 +17,38 @@ pytest = "^8.2.2"
 pre-commit = "^3.7.1"
 pyright = "^1.1.372"
 
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+include = ["src"]
+exclude = ["**/node_modules", "**/__pycache__", "**/.*", "**/typings", "**/tests", "**/tmp"]
+ignore = ["**/*.pyi"]
+extraPaths = ["src"]
+useLibraryCodeForTypes = false
+reportMissingTypeStubs = false
+reportUnknownVariableType = false
+reportUnknownMemberType = false
+reportUntypedFunctionDecorator = false
+reportOptionalMemberAccess = false
+typeCheckingMode = "strict"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+line-length = 120
+indent-width = 4
+
+src=["src"]
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = ["E", "F", "I", "W"]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.isort]
+force-single-line = true
+known-local-folder = ["tests"]

@@ -1,0 +1,50 @@
+name: Build
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+
+    env:
+      LOG_LEVEL: debug
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+
+      - name: Format
+        uses: chartboost/ruff-action@v1
+        with:
+          args: format --diff
+
+      - name: Lint
+        uses: chartboost/ruff-action@v1
+        with:
+          args: check
+
+      - name: Add Dependencies via Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+          poetry install
+
+      - name: Static type check
+        run: |
+          source .venv/bin/activate
+          pyright .
+
+      - name: Test - pytest
+        if: ${{ !inputs.tox_test }}
+        run: |
+          source .venv/bin/activate
+          coverage run -m pytest
+          coverage xml

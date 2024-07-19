@@ -1,11 +1,9 @@
-import logging
 import sys
 
+from exceptions.exceptions import InvalidInitialPosition
 from models.models import CardinalPoint
 from models.models import Direction
-from exceptions.exceptions import InvalidInitialPosition
-
-logger = logging.getLogger(__name__)
+from utils.logger import logger
 
 
 class Robot:
@@ -35,8 +33,6 @@ class Robot:
                 self.y += 1
             case CardinalPoint.SOUTH:
                 self.y -= 1
-            case _:
-                logger.error("Invalid Point.")
 
         if not self.is_on_table():
             self.x, self.y = temp
@@ -45,9 +41,8 @@ class Robot:
         cardinal_direction = CardinalDirection()
         self.point = cardinal_direction.turn(point=self.point, direction=direction)
 
-    def report(self):  # print or export file as csv
-        print(self.x, self.y, self.point.value)
-        logger.info(self.x, self.y, self.point.value)
+    def report(self):
+        logger.info(msg=f"{self.x}, {self.y}, {self.point.value}")
 
     def is_on_table(self) -> bool:  # out of table
         return (0 <= self.x < self.rows) and (0 <= self.y < self.cols)
