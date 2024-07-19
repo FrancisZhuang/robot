@@ -49,5 +49,4 @@ jobs:
         if: ${{ !inputs.tox_test }}
         run: |
           source .venv/bin/activate
-          coverage run -m pytest
-          coverage xml
+          pytest .
