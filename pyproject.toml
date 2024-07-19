@@ -6,12 +6,11 @@ build-backend = "setuptools.build_meta"
 name = "robot"
 version = "0.1.0"
 description = ""
-authors = ["francis <c480765125@gmail.com>"]
+authors = ["francis"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-pydantic = "^2.8.2"
 pandas = "^2.2.2"
 pytest = "^8.2.2"
 pre-commit = "^3.7.1"
