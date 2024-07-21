@@ -39,7 +39,7 @@ def valid_command(command: str) -> Command | Direction | None:
 
 def main():
     initial_place = False
-    x, y, point = None, None, None
+    x, y, point = -1, -1, None
 
     while not initial_place:
         init_command = input("Place your robot - Place X, Y, CardinalPoint\n")
@@ -48,7 +48,7 @@ def main():
             x, y, point = init_command
             initial_place = True
 
-    if x and y and point:
+    if x >= 0 and y >= 0 and point:
         robot = Robot(x, y, point)
     else:
         return
