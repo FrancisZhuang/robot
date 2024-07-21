@@ -44,11 +44,6 @@ typeCheckingMode = "strict"
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 
-line-length = 120
-indent-width = 4
-
-src=["src"]
-
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
 select = ["E", "F", "I", "W"]
