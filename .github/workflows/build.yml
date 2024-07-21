@@ -46,7 +46,6 @@ jobs:
           pyright .
 
       - name: Test - pytest
-        if: ${{ !inputs.tox_test }}
         run: |
           source .venv/bin/activate
           pytest .
